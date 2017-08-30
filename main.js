@@ -1,17 +1,21 @@
 'use strict';
 
-var app = require('app');
-var BrowserWindow = require('browser-window');
+const {app, BrowserWindow} = require("electron");
 
 var mainWindow = null;
 
 app.on('ready', function() {
     mainWindow = new BrowserWindow({
         frame: false,
-        height: 700,
         resizable: false,
-        width: 368
+        height: 700,
+        width: 370
     });
 
-    mainWindow.loadUrl('file://' + __dirname + '/app/index.html');
+    mainWindow.loadURL('file://' + __dirname + '/app/index.html');
+});
+
+const {ipcMain} = require('electron');
+ipcMain.on('close-main-window', (event, argigit) => {
+  app.quit();
 });
